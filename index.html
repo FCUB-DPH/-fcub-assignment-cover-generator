@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FCUB Assignment Cover Page Generator</title>
+<style>
+:root{--navy:#12345a;--blue:#1e5b91;--gold:#c79b3b;--ink:#202a35;--muted:#657386;--line:#d9e1ea;--bg:#f3f6fa}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink)}
+header{background:linear-gradient(120deg,#102c4d,#1e5b91);color:#fff;padding:25px 18px;text-align:center}
+header h1{font-size:clamp(20px,4vw,30px);margin:0 0 7px}
+header p{margin:0;color:#e2edf8;font-size:14px}
+main{max-width:1200px;margin:24px auto;padding:0 16px;display:grid;grid-template-columns:minmax(280px,420px) 1fr;gap:22px;align-items:start}
+.panel{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px;box-shadow:0 5px 20px #1b365010}
+.panel h2{font-size:18px;color:var(--navy);margin:0 0 16px}
+.field{margin-bottom:12px}
+label{display:block;font-size:12px;font-weight:700;color:#425268;margin-bottom:5px}
+input,textarea{width:100%;padding:10px 11px;border:1px solid #cbd5e1;border-radius:8px;font:14px Arial;background:#fff;color:#1f2937}
+input:focus,textarea:focus{outline:2px solid #9fc5e8;border-color:var(--blue)}
+textarea{resize:vertical;min-height:60px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+button{border:0;border-radius:8px;padding:11px 15px;font-weight:700;cursor:pointer}
+.primary{background:var(--navy);color:white}.secondary{background:#e8eef5;color:var(--navy)}
+.hint{font-size:12px;line-height:1.5;color:var(--muted);margin:12px 0 0}
+.preview-wrap{overflow:auto;padding:8px 2px 18px}
+.paper{width:794px;min-height:1123px;background:#fff;margin:0 auto;box-shadow:0 8px 28px #142b4520;padding:68px 64px;position:relative;color:#111;text-align:center}
+.paper:before{content:"";position:absolute;inset:28px;border:2px solid var(--navy);pointer-events:none}
+.paper:after{content:"";position:absolute;inset:36px;border:1px solid var(--gold);pointer-events:none}
+.paper-content{position:relative;z-index:1;min-height:985px;display:flex;flex-direction:column;align-items:center}
+.logo{width:100px;height:100px;object-fit:contain;margin:6px auto 20px;display:none}
+.logo-placeholder{width:100px;height:100px;border:1px dashed #aeb9c7;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#718096;font-size:11px;margin:6px auto 20px}
+.university{font-size:25px;line-height:1.25;font-weight:800;letter-spacing:.4px;color:var(--navy);text-transform:uppercase;max-width:610px}
+.department{font-size:17px;font-weight:700;margin-top:10px;color:#263b53}
+.address{font-size:13px;color:#4b5563;margin-top:6px}
+.rule{width:72%;height:2px;background:var(--gold);margin:28px auto 35px}
+.doc-type{font-size:25px;letter-spacing:2px;font-weight:800;color:#172f4d;text-transform:uppercase;margin-bottom:14px}
+.doc-title{font-size:21px;font-weight:700;line-height:1.45;max-width:610px;min-height:60px}
+.details{width:82%;margin-top:48px;text-align:left;font-size:16px;line-height:1.7}
+.detail-row{display:grid;grid-template-columns:155px 15px 1fr;margin:7px 0;align-items:start}
+.detail-label{font-weight:700;color:#263b53}.colon{text-align:center}.detail-value{overflow-wrap:anywhere;white-space:pre-wrap}
+.submission{display:grid;grid-template-columns:1fr 1fr;gap:38px;width:88%;margin-top:auto;padding-top:60px;text-align:left}
+.submission h3{font-size:15px;color:var(--navy);margin:0 0 12px;text-transform:uppercase;border-bottom:1px solid var(--gold);padding-bottom:7px}
+.submission p{font-size:14px;line-height:1.55;margin:4px 0;white-space:pre-wrap}
+.footer{margin-top:36px;font-size:13px;color:#4b5563}
+@media(max-width:900px){main{grid-template-columns:1fr}.paper{transform-origin:top left}.preview-wrap{overflow-x:auto}}
+@media print{
+ @page{size:A4;margin:0}
+ body{background:#fff}
+ header,.form-panel,.hint,.screen-only{display:none!important}
+ main{display:block;margin:0;padding:0}
+ .preview-wrap{padding:0;overflow:visible}
+ .paper{width:210mm;height:297mm;min-height:297mm;margin:0;box-shadow:none;padding:18mm 17mm;break-after:avoid}
+ .paper:before{inset:7mm}.paper:after{inset:9mm}
+ .paper-content{min-height:261mm}
+}
+</style>
+</head>
+<body>
+<header>
+  <h1>FCUB Assignment Cover Page Generator</h1>
+  <p>First Capital University of Bangladesh · University Assignment</p>
+</header>
+<main>
+<section class="panel form-panel">
+<h2>Enter Assignment Information</h2>
+<div class="field"><label for="department">Department</label><input id="department" placeholder="e.g. Department of Public Health"></div>
+<div class="field"><label for="course">Course Title</label><input id="course" placeholder="Enter course title"></div>
+<div class="grid2">
+  <div class="field"><label for="code">Course Code</label><input id="code" placeholder="e.g. BPH-237"></div>
+  <div class="field"><label for="semester">Semester / Year</label><input id="semester" placeholder="e.g. 2nd Year, 1st Semester"></div>
+</div>
+<div class="field"><label for="title">Assignment Title</label><textarea id="title" placeholder="Enter assignment title"></textarea></div>
+<div class="grid2">
+  <div class="field"><label for="student">Student Name</label><input id="student" placeholder="Full name"></div>
+  <div class="field"><label for="studentid">Student ID / Roll</label><input id="studentid" placeholder="ID or roll"></div>
+</div>
+<div class="grid2">
+  <div class="field"><label for="batch">Batch</label><input id="batch" placeholder="e.g. 12th Batch"></div>
+  <div class="field"><label for="date">Submission Date</label><input id="date" type="date"></div>
+</div>
+<div class="field"><label for="teacher">Submitted To (Teacher's Name)</label><input id="teacher" placeholder="Teacher's name"></div>
+<div class="field"><label for="designation">Teacher's Designation</label><input id="designation" placeholder="e.g. Lecturer"></div>
+<div class="field"><label for="teacherdept">Teacher's Department</label><input id="teacherdept" placeholder="e.g. Department of Public Health"></div>
+<div class="field"><label for="logoFile">University Logo (optional)</label><input id="logoFile" type="file" accept="image/*"></div>
+<div class="actions">
+<button class="primary" onclick="window.print()">Download / Save as PDF</button>
+<button class="secondary" type="button" onclick="resetForm()">Reset Form</button>
+</div>
+<p class="hint">To save as PDF, tap “Download / Save as PDF”, then select “Save as PDF” in your browser's print options. For best results, use A4 paper size and enable background graphics if available.</p>
+</section>
+
+<section>
+<div class="screen-only" style="font-size:14px;color:#5c6b7d;margin:0 0 10px 4px;font-weight:700">LIVE PREVIEW · A4 PAGE</div>
+<div class="preview-wrap">
+<div class="paper" id="paper">
+ <div class="paper-content">
+  <img class="logo" id="previewLogo" alt="University logo">
+  <div class="logo-placeholder" id="logoPlaceholder">UNIVERSITY<br>LOGO</div>
+  <div class="university">First Capital University<br>of Bangladesh</div>
+  <div class="department" id="pDepartment">Department Name</div>
+  <div class="address">Chuadanga, Bangladesh</div>
+  <div class="rule"></div>
+  <div class="doc-type">Assignment</div>
+  <div class="doc-title" id="pTitle">Assignment Title</div>
+  <div class="details">
+   <div class="detail-row"><div class="detail-label">Course Title</div><div class="colon">:</div><div class="detail-value" id="pCourse">—</div></div>
+   <div class="detail-row"><div class="detail-label">Course Code</div><div class="colon">:</div><div class="detail-value" id="pCode">—</div></div>
+   <div class="detail-row"><div class="detail-label">Semester / Year</div><div class="colon">:</div><div class="detail-value" id="pSemester">—</div></div>
+   <div class="detail-row"><div class="detail-label">Batch</div><div class="colon">:</div><div class="detail-value" id="pBatch">—</div></div>
+  </div>
+  <div class="submission">
+   <div><h3>Submitted To</h3><p id="pTeacher">Teacher's Name</p><p id="pDesignation">Designation</p><p id="pTeacherDept">Department</p></div>
+   <div><h3>Submitted By</h3><p id="pStudent">Student Name</p><p id="pStudentId">Student ID / Roll</p><p id="pStudentDept">Department Name</p><p id="pDate">Submission Date</p></div>
+  </div>
+  <div class="footer">First Capital University of Bangladesh</div>
+ </div>
+</div>
+</div>
+</section>
+</main>
+<script>
+const map={department:'pDepartment',course:'pCourse',code:'pCode',semester:'pSemester',title:'pTitle',student:'pStudent',studentid:'pStudentId',batch:'pBatch',teacher:'pTeacher',designation:'pDesignation',teacherdept:'pTeacherDept'};
+function val(id, fallback){const el=document.getElementById(id);return el.value.trim()||fallback}
+Object.entries(map).forEach(([id,target])=>document.getElementById(id).addEventListener('input',()=>{
+ const fallback=({department:'Department Name',title:'Assignment Title',student:"Student Name",teacher:"Teacher's Name"})[id]||'—';
+ document.getElementById(target).textContent=val(id,fallback);
+ if(id==='department')document.getElementById('pStudentDept').textContent=val(id,'Department Name');
+}));
+document.getElementById('date').addEventListener('change',e=>{
+ const d=e.target.value?new Date(e.target.value+'T00:00:00').toLocaleDateString('en-GB',{day:'2-digit',month:'long',year:'numeric'}):'Submission Date';
+ document.getElementById('pDate').textContent=d;
+});
+document.getElementById('logoFile').addEventListener('change',e=>{
+ const file=e.target.files[0];if(!file)return;
+ const reader=new FileReader();reader.onload=()=>{const img=document.getElementById('previewLogo');img.src=reader.result;img.style.display='block';document.getElementById('logoPlaceholder').style.display='none'};reader.readAsDataURL(file);
+});
+function resetForm(){
+ document.querySelectorAll('input,textarea').forEach(el=>{if(el.type==='file')el.value='';else el.value=''});
+ Object.entries(map).forEach(([id,target])=>{const fallback=({department:'Department Name',title:'Assignment Title',student:'Student Name',teacher:"Teacher's Name"})[id]||'—';document.getElementById(target).textContent=fallback});
+ document.getElementById('pStudentDept').textContent='Department Name';document.getElementById('pDate').textContent='Submission Date';
+ document.getElementById('previewLogo').style.display='none';document.getElementById('previewLogo').src='';document.getElementById('logoPlaceholder').style.display='flex';
+}
+</script>
+</body>
+</html>
